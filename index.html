@@ -135,44 +135,217 @@
         }
 
         .hero {
-            text-align: center;
-            padding: 100px 20px;
-            background: linear-gradient(45deg, #000000, #000000);
+            position: relative;
+            min-height: calc(100vh - 78px);
+            display: flex;
+            align-items: center;
+            padding: 110px 64px 92px;
+            color: #f8fafc;
+            text-align: left;
+            overflow: hidden;
+            background:
+                linear-gradient(135deg, rgba(8, 15, 30, 0.98) 0%, rgba(15, 23, 42, 0.98) 48%, rgba(3, 7, 18, 1) 100%),
+                repeating-linear-gradient(90deg, rgba(148, 163, 184, 0.07) 0 1px, transparent 1px 96px);
+        }
+
+        .hero-content {
+            width: min(1180px, 100%);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+            align-items: center;
+            gap: 64px;
+        }
+
+        .hero-text {
+            max-width: 760px;
+        }
+
+        .hero-title,
+        .hero-subtitle,
+        .hero-description,
+        .hero-actions,
+        .hero-socials,
+        .hero-image {
+            opacity: 0;
+        }
+
+        .hero-title {
+            margin-bottom: 20px;
+            color: #f8fafc;
+            font-size: clamp(2.45rem, 5vw, 4.9rem);
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: 0;
+            animation: slideInLeft 0.9s ease forwards;
+        }
+
+        .hero-title span {
+            display: block;
+            background: linear-gradient(135deg, #38bdf8 0%, #4ade80 100%);
             background-clip: text;
             -webkit-background-clip: text;
-        }
-
-        .hero h1 {
-            font-size: 2.4rem;
-            font-weight: 700;
             color: transparent;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
         }
 
-        .hero p {
-            font-size: 1.3rem;
+        .hero-subtitle {
+            max-width: 700px;
+            margin-bottom: 22px;
+            color: #a5f3fc;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 600;
+            line-height: 1.7;
+            animation: fadeUp 0.9s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        .hero-description {
+            max-width: 680px;
+            margin-bottom: 32px;
+            color: #cbd5e1;
+            font-size: 1.05rem;
             font-weight: 300;
-            color: #000000;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+            line-height: 1.8;
+            animation: fadeUp 0.9s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+            animation: fadeUp 0.9s ease forwards;
+            animation-delay: 0.7s;
         }
 
         .hero .btn {
-            padding: 12px 30px;
-            font-size: 1rem;
-            color: #ffffff;
-            background-color: rgb(20, 102, 120);
-            border: none;
-            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 13px 22px;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            border-radius: 999px;
+            color: #f8fafc;
+            background-color: rgba(15, 23, 42, 0.74);
+            box-shadow: 0 12px 30px rgba(2, 6, 23, 0.25);
             cursor: pointer;
+            font-size: 0.96rem;
+            font-weight: 700;
             text-decoration: none;
-            transition: all 0.3s;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
         }
 
-        .hero .btn:hover {
-            background-color: #a11717;
-            transform: translateY(-5px);
+        .hero .btn:hover,
+        .hero .btn:focus-visible {
+            transform: translateY(-4px);
+            border-color: rgba(56, 189, 248, 0.7);
+            box-shadow: 0 18px 38px rgba(8, 145, 178, 0.2);
+            outline: none;
+        }
+
+        .hero .btn-primary {
+            color: #06111f;
+            border-color: transparent;
+            background: linear-gradient(135deg, #38bdf8, #22c55e);
+        }
+
+        .hero .btn-primary:hover,
+        .hero .btn-primary:focus-visible {
+            background: linear-gradient(135deg, #7dd3fc, #4ade80);
+        }
+
+        .hero-socials {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 0.9s;
+        }
+
+        .hero-socials a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 10px 16px;
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            border-radius: 999px;
+            color: #cbd5e1;
+            background-color: rgba(15, 23, 42, 0.62);
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+        }
+
+        .hero-socials a:hover,
+        .hero-socials a:focus-visible {
+            color: #ffffff;
+            border-color: rgba(74, 222, 128, 0.7);
+            transform: translateY(-3px);
+            outline: none;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 0.9s;
+        }
+
+        .profile-card {
+            width: min(100%, 380px);
+            aspect-ratio: 4 / 5;
+            padding: 14px;
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            border-radius: 28px;
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(20, 83, 45, 0.24));
+            box-shadow: 0 28px 70px rgba(2, 6, 23, 0.38);
+        }
+
+        .profile-card img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-42px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         .about,
@@ -368,6 +541,39 @@
                 padding: 16px 24px;
             }
 
+            .hero {
+                min-height: auto;
+                padding: 88px 24px 72px;
+                text-align: center;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 42px;
+            }
+
+            .hero-text {
+                max-width: 720px;
+                margin: 0 auto;
+            }
+
+            .hero-title span {
+                display: inline;
+            }
+
+            .hero-actions,
+            .hero-socials {
+                justify-content: center;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .profile-card {
+                width: min(100%, 320px);
+            }
+
             .nav-toggle {
                 display: inline-flex;
             }
@@ -425,6 +631,37 @@
                 padding: 14px 16px;
             }
 
+            .hero {
+                padding: 72px 16px 56px;
+            }
+
+            .hero-title {
+                font-size: clamp(2rem, 12vw, 3rem);
+            }
+
+            .hero-subtitle {
+                font-size: 0.96rem;
+            }
+
+            .hero-description {
+                font-size: 0.98rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero .btn {
+                width: 100%;
+                max-width: 290px;
+                margin: 0 auto;
+            }
+
+            .hero-socials a {
+                flex: 1 1 120px;
+            }
+
             .logo {
                 max-width: 190px;
                 overflow: hidden;
@@ -434,6 +671,19 @@
             .site-nav {
                 left: 10px;
                 right: 10px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-title,
+            .hero-subtitle,
+            .hero-description,
+            .hero-actions,
+            .hero-socials,
+            .hero-image {
+                opacity: 1;
+                animation: none;
+                transform: none;
             }
         }
 
@@ -464,9 +714,32 @@
     </header>
 
     <section id="home" class="hero">
-        <h1>Hello, I'm Nafisa Tabassum Sraboni</h1>
-        <p>A passionate Full Stack Developer focused on React.js, Node.js, Firebase, JavaScript, and clean responsive web experiences.</p>
-        <a href="#contact" class="btn">Contact Me</a>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Hi, I’m <span>Nafisa Tabassum Sraboni</span></h1>
+                <p class="hero-subtitle">Full Stack Developer | UI/UX Designer | React.js | Node.js | Firebase | MongoDB | HTML | CSS | Tailwind CSS</p>
+                <p class="hero-description">
+                    I build modern, responsive, and user-friendly web applications using React.js, Node.js, Firebase,
+                    and JavaScript. I enjoy solving problems, learning new technologies, and creating practical software
+                    projects.
+                </p>
+                <div class="hero-actions">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <!-- TODO: Replace href with the resume file path when the resume file is added. -->
+                    <a href="#" class="btn">Download Resume</a>
+                    <a href="#contact" class="btn">Contact Me</a>
+                </div>
+                <div class="hero-socials" aria-label="Social links">
+                    <a href="https://github.com/nafisasraboni/" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://www.linkedin.com/in/nafisasraboni/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-card">
+                    <img src="portfolio.png" alt="Portrait of Nafisa Tabassum Sraboni">
+                </div>
+            </div>
+        </div>
     </section>
 
     <section id="about" class="about">
