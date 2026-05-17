@@ -31,8 +31,132 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        body.intro-active {
+            overflow: hidden;
+        }
+
         section {
             scroll-margin-top: 96px;
+        }
+
+        .intro-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            color: #f8fafc;
+            background:
+                radial-gradient(circle at 22% 22%, rgba(56, 189, 248, 0.28), transparent 34%),
+                radial-gradient(circle at 78% 72%, rgba(34, 197, 94, 0.2), transparent 32%),
+                linear-gradient(135deg, #020617 0%, #0f172a 52%, #020617 100%);
+            overflow: hidden;
+        }
+
+        .intro-loader::before {
+            content: "";
+            position: absolute;
+            width: min(70vw, 720px);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(34, 197, 94, 0.12));
+            filter: blur(22px);
+            opacity: 0.9;
+        }
+
+        .intro-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            justify-items: center;
+            gap: 18px;
+            text-align: center;
+        }
+
+        .intro-card {
+            width: 150px;
+            height: 150px;
+            padding: 8px;
+            border: 1px solid rgba(148, 163, 184, 0.28);
+            border-radius: 26px;
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.9));
+            box-shadow: 0 28px 70px rgba(2, 6, 23, 0.48), 0 0 42px rgba(56, 189, 248, 0.18);
+            animation: introSlideIn 0.85s ease forwards;
+            opacity: 0;
+        }
+
+        .intro-card img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .intro-title {
+            margin-top: 8px;
+            color: #cbd5e1;
+            font-size: clamp(1rem, 3vw, 1.35rem);
+            font-weight: 500;
+            animation: introFadeIn 0.85s ease forwards;
+            animation-delay: 0.35s;
+            opacity: 0;
+        }
+
+        .intro-name {
+            color: #f8fafc;
+            font-size: clamp(2rem, 8vw, 4.6rem);
+            font-weight: 700;
+            line-height: 1.08;
+            background: linear-gradient(135deg, #38bdf8 0%, #4ade80 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: introFadeIn 0.9s ease forwards;
+            animation-delay: 0.65s;
+            opacity: 0;
+        }
+
+        .intro-hide {
+            animation: introFadeOut 0.75s ease forwards;
+        }
+
+        @keyframes introFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes introSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(34px) scale(0.94);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes introFadeOut {
+            from {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
         }
 
         .site-header {
@@ -680,6 +804,16 @@
                 padding: 14px 16px;
             }
 
+            .intro-card {
+                width: 124px;
+                height: 124px;
+                border-radius: 22px;
+            }
+
+            .intro-card img {
+                border-radius: 16px;
+            }
+
             .hero {
                 padding: 72px 16px 56px;
             }
@@ -743,13 +877,38 @@
                 transform: none;
                 transition: none;
             }
+
+            .intro-loader,
+            .intro-card,
+            .intro-title,
+            .intro-name,
+            .intro-hide {
+                animation: none;
+            }
+
+            .intro-card,
+            .intro-title,
+            .intro-name {
+                opacity: 1;
+                transform: none;
+            }
         }
 
         
     </style>
 </head>
 
-<body>
+<body class="intro-active">
+    <div class="intro-loader" id="intro-loader" role="status" aria-live="polite">
+        <div class="intro-content">
+            <div class="intro-card">
+                <img src="portfolio.png" alt="Nafisa Sraboni portfolio portrait">
+            </div>
+            <p class="intro-title">Welcome to My Portfolio</p>
+            <h1 class="intro-name">Nafisa Tabassum Sraboni</h1>
+        </div>
+    </div>
+
     <header class="site-header">
         <a class="logo" href="#home" aria-label="Nafisa Tabassum Sraboni home">Nafisa Tabassum <span>Sraboni</span></a>
         <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-controls="primary-navigation"
@@ -909,6 +1068,26 @@
     </footer>
 
     <script>
+        const introLoader = document.getElementById('intro-loader');
+        const prefersReducedMotion = window.matchMedia &&
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (introLoader) {
+            window.addEventListener('load', () => {
+                const introDelay = prefersReducedMotion ? 400 : 2700;
+
+                window.setTimeout(() => {
+                    introLoader.classList.add('intro-hide');
+                    document.body.classList.remove('intro-active');
+
+                    window.setTimeout(() => {
+                        introLoader.setAttribute('aria-hidden', 'true');
+                        introLoader.style.display = 'none';
+                    }, prefersReducedMotion ? 0 : 800);
+                }, introDelay);
+            });
+        }
+
         const header = document.querySelector('.site-header');
         const navToggle = document.querySelector('.nav-toggle');
         const navLinks = document.querySelectorAll('.site-nav a');
