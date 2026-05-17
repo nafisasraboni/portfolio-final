@@ -35,6 +35,15 @@
             overflow: hidden;
         }
 
+        body.intro-active .hero-title,
+        body.intro-active .hero-subtitle,
+        body.intro-active .hero-description,
+        body.intro-active .hero-actions,
+        body.intro-active .hero-socials,
+        body.intro-active .hero-image {
+            animation-play-state: paused;
+        }
+
         section {
             scroll-margin-top: 96px;
         }
@@ -59,32 +68,102 @@
             content: "";
             position: absolute;
             inset: 0;
+            z-index: 0;
             background:
                 linear-gradient(90deg, rgba(14, 165, 233, 0.22), transparent 24%, transparent 76%, rgba(37, 99, 235, 0.18)),
                 linear-gradient(180deg, rgba(15, 23, 42, 0.12), transparent 40%, rgba(2, 6, 23, 0.2));
+            transition: opacity 0.45s ease;
             pointer-events: none;
         }
 
         .intro-loader::after {
             content: "";
             position: absolute;
+            z-index: 0;
             width: min(72vw, 760px);
             height: min(72vw, 760px);
             border-radius: 50%;
             background: radial-gradient(circle, rgba(56, 189, 248, 0.15), rgba(37, 99, 235, 0.08), transparent 68%);
             filter: blur(24px);
             opacity: 0.85;
+            transition: opacity 0.45s ease;
+        }
+
+        .intro-loader.doors-open {
+            background: transparent;
+        }
+
+        .intro-loader.doors-open::before,
+        .intro-loader.doors-open::after {
+            opacity: 0;
+        }
+
+        .door-panel {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            z-index: 2;
+            width: 50%;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 50% 42%, rgba(56, 189, 248, 0.16), transparent 36%),
+                linear-gradient(135deg, rgba(2, 6, 23, 0.98), rgba(15, 23, 42, 0.98));
+            box-shadow: inset 0 0 46px rgba(56, 189, 248, 0.12);
+            transition: transform 0.95s cubic-bezier(0.77, 0, 0.18, 1);
+            will-change: transform;
+        }
+
+        .door-panel::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, transparent, rgba(125, 211, 252, 0.88), rgba(37, 99, 235, 0.5), transparent);
+            box-shadow: 0 0 28px rgba(56, 189, 248, 0.7);
+        }
+
+        .door-panel-left {
+            left: 0;
+            border-right: 1px solid rgba(125, 211, 252, 0.28);
+        }
+
+        .door-panel-left::after {
+            right: -1px;
+        }
+
+        .door-panel-right {
+            right: 0;
+            border-left: 1px solid rgba(125, 211, 252, 0.28);
+        }
+
+        .door-panel-right::after {
+            left: -1px;
+        }
+
+        .doors-open .door-panel-left {
+            transform: translateX(-100%);
+        }
+
+        .doors-open .door-panel-right {
+            transform: translateX(100%);
         }
 
         .intro-content {
             position: relative;
-            z-index: 1;
+            z-index: 3;
             display: grid;
             grid-template-columns: minmax(320px, 1fr) minmax(280px, 0.8fr);
             align-items: center;
             gap: clamp(32px, 7vw, 84px);
             width: min(1120px, 100%);
             text-align: center;
+            transition: opacity 0.45s ease, transform 0.45s ease;
+        }
+
+        .doors-open .intro-content {
+            opacity: 0;
+            transform: scale(0.96);
         }
 
         .intro-card {
@@ -1016,6 +1095,10 @@
                 animation: none;
             }
 
+            .door-panel {
+                transition: none;
+            }
+
             .intro-card,
             .intro-title,
             .intro-name {
@@ -1030,6 +1113,8 @@
 
 <body class="intro-active">
     <div class="intro-loader" id="intro-loader" role="status" aria-live="polite">
+        <div class="door-panel door-panel-left"></div>
+        <div class="door-panel door-panel-right"></div>
         <div class="intro-content">
             <div class="intro-card">
                 <div class="intro-photo-wrap">
@@ -1212,7 +1297,13 @@
 
         if (introLoader) {
             window.addEventListener('load', () => {
-                const introDelay = prefersReducedMotion ? 400 : 2700;
+                const doorDelay = prefersReducedMotion ? 250 : 2200;
+                const hideDelay = prefersReducedMotion ? 350 : 3100;
+                const removeDelay = prefersReducedMotion ? 0 : 800;
+
+                window.setTimeout(() => {
+                    introLoader.classList.add('doors-open');
+                }, doorDelay);
 
                 window.setTimeout(() => {
                     introLoader.classList.add('intro-hide');
@@ -1221,8 +1312,8 @@
                     window.setTimeout(() => {
                         introLoader.setAttribute('aria-hidden', 'true');
                         introLoader.style.display = 'none';
-                    }, prefersReducedMotion ? 0 : 800);
-                }, introDelay);
+                    }, removeDelay);
+                }, hideDelay);
             });
         }
 
