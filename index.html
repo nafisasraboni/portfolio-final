@@ -348,6 +348,28 @@
             }
         }
 
+        .reveal,
+        .reveal-up,
+        .reveal-left,
+        .reveal-right {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-left {
+            transform: translateX(-40px);
+        }
+
+        .reveal-right {
+            transform: translateX(40px);
+        }
+
+        .reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .about,
         .skills,
         .experience,
@@ -685,6 +707,15 @@
                 animation: none;
                 transform: none;
             }
+
+            .reveal,
+            .reveal-up,
+            .reveal-left,
+            .reveal-right {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
         }
 
         
@@ -693,7 +724,7 @@
 
 <body>
     <header class="site-header">
-        <a class="logo" href="#home" aria-label="Nafisa Tabassum Sraboni home">Nafisa Tabassum Sraboni</span></a>
+        <a class="logo" href="#home" aria-label="Nafisa Tabassum Sraboni home">Nafisa Tabassum <span>Sraboni</span></a>
         <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-controls="primary-navigation"
             aria-expanded="false">
             <span></span>
@@ -900,6 +931,26 @@
 
             navTargets.forEach((section) => observer.observe(section));
             setActiveLink(navTargets[0].id);
+        }
+
+        const revealElements = document.querySelectorAll('.reveal, .reveal-up, .reveal-left, .reveal-right');
+
+        if ('IntersectionObserver' in window && revealElements.length) {
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -80px 0px'
+            });
+
+            revealElements.forEach((element) => revealObserver.observe(element));
+        } else {
+            revealElements.forEach((element) => element.classList.add('reveal-visible'));
         }
     </script>
 </body>
