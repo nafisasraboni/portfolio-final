@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nafisa Tabassum Sraboni - Home</title>
+    <title>Nafisa Tabassum Sraboni - Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="intro-active" data-page="home">
+<body class="intro-active">
     <div class="intro-loader" id="intro-loader" role="status" aria-live="polite">
         <div class="door-panel door-panel-left"></div>
         <div class="door-panel door-panel-right"></div>
@@ -32,55 +32,52 @@
         </div>
     </div>
 
+    <!-- Header / Navbar -->
     <header class="site-header">
-        <a class="logo" href="index.html" aria-label="Nafisa Tabassum Sraboni home">Nafisa Tabassum <span>Sraboni</span></a>
+        <a class="logo" href="#home" aria-label="Nafisa Tabassum Sraboni home">Nafisa Tabassum <span>Sraboni</span></a>
         <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-controls="primary-navigation"
             aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
         </button>
-                <nav class="site-nav" id="primary-navigation" aria-label="Primary navigation">
+        <nav class="site-nav" id="primary-navigation" aria-label="Primary navigation">
             <ul>
-                <li><a href="index.html" data-page="home">Home</a></li>
-                <li><a href="about.html" data-page="about">About</a></li>
-                <li><a href="projects.html" data-page="projects">Projects</a></li>
-                <li><a href="skills.html" data-page="skills">Skills</a></li>
-                <li><a href="experience.html" data-page="experience">Experience</a></li>
-                <li><a href="services.html" data-page="services">Services</a></li>
-                <li><a class="nav-cta" href="contact.html" data-page="contact">Contact</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a class="nav-cta" href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">Hi, I’m <span>Nafisa Tabassum Sraboni</span></h1>
-                <p class="hero-subtitle">Full Stack Developer | UI/UX Designer | React.js | Node.js | Firebase | MongoDB | HTML | CSS | Tailwind CSS</p>
-                <p class="hero-description">
-                    I build modern, responsive, and user-friendly web applications using React.js, Node.js, Firebase,
-                    and JavaScript. I enjoy solving problems, learning new technologies, and creating practical software
-                    projects.
-                </p>
-                <div class="hero-actions">
-                    <a href="projects.html" class="btn btn-primary">View Projects</a>
-                    <a href="Nafisa_TabassumSraboni_CV_2.pdf" class="btn" download>Download Resume</a>
-                    <a href="contact.html" class="btn">Contact Me</a>
-                </div>
-                <div class="hero-socials" aria-label="Social links">
-                    <a href="https://github.com/nafisasraboni/" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a href="https://www.linkedin.com/in/nafisasraboni/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="profile-card">
-                    <img src="images/portfolio.png" alt="Portrait of Nafisa Tabassum Sraboni">
-                </div>
-            </div>
-        </div>
-    </section>
+    <main>
+        <!-- Home Section -->
+        <div data-include="sections/home.html"></div>
 
+        <!-- About Section -->
+        <div data-include="sections/about.html"></div>
+
+        <!-- Projects Section -->
+        <div data-include="sections/projects.html"></div>
+
+        <!-- Skills Section -->
+        <div data-include="sections/skills.html"></div>
+
+        <!-- Experience Section -->
+        <div data-include="sections/experience.html"></div>
+
+        <!-- Services Section -->
+        <div data-include="sections/services.html"></div>
+
+        <!-- Contact Section -->
+        <div data-include="sections/contact.html"></div>
+    </main>
+
+    <!-- Footer -->
     <footer>
         <p>&copy; 2024 Nafisa Tabassum Sraboni. All Rights Reserved.</p>
     </footer>
