@@ -846,22 +846,45 @@
             transform: translateY(-2px);
         }
 
+        .contact-content {
+            width: min(1040px, 100%);
+            margin: 0 auto;
+        }
+
+        .contact-heading {
+            max-width: 680px;
+            margin: 0 auto 30px;
+        }
+
+        .contact h2 {
+            font-size: 2.3rem;
+            color: #f8fafc;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .contact-intro {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
         .contact-methods {
-            width: min(760px, 100%);
-            margin: 28px auto 0;
+            width: 100%;
+            margin: 0 auto 42px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 16px;
         }
 
         .contact-card {
-            min-height: 118px;
-            padding: 20px 14px;
+            min-height: 132px;
+            padding: 20px 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             color: #f8fafc;
             text-decoration: none;
             background-color: #111827;
@@ -917,22 +940,46 @@
             stroke: none;
         }
 
-        .contact-card span:last-child {
+        .contact-card-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .contact-label {
             font-size: 1rem;
             font-weight: 600;
+        }
+
+        .contact-note {
+            color: #94a3b8;
+            font-size: 0.82rem;
+            line-height: 1.4;
+        }
+
+        .contact-form-panel {
+            width: min(680px, 100%);
+            margin: 0 auto;
+            padding: 26px;
+            background-color: #111827;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            border-radius: 12px;
+            box-shadow: 0 22px 52px rgba(2, 6, 23, 0.32);
+        }
+
+        .contact-form-panel h3 {
+            margin-bottom: 18px;
+            color: #f8fafc;
+            font-size: 1.25rem;
         }
 
         .contact form {
             display: flex;
             flex-direction: column;
             gap: 20px;
-            max-width: 600px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 25px;
-            background-color: #111827;
-            border: 1px solid rgba(148, 163, 184, 0.18);
-            border-radius: 10px;
-            box-shadow: 0 22px 52px rgba(2, 6, 23, 0.32);
         }
 
         .contact input,
@@ -972,44 +1019,16 @@
             color: #cbd5e1;
         }
 
-        .contact {
-    padding: 50px 10px;
-    background:
-        linear-gradient(180deg, rgba(15, 23, 42, 0.84), rgba(2, 6, 23, 0.96)),
-        repeating-linear-gradient(90deg, rgba(148, 163, 184, 0.04) 0 1px, transparent 1px 96px);
-    text-align: center;
-    color: #cbd5e1;
-}
-
-.contact h2 {
-    font-size: 2.2rem;
-    margin-bottom: 10px;
-    color: #f8fafc;
-}
-
-.contact p {
-    font-size: 1rem;
-    margin-bottom: 5px;
-    line-height: 1.6;
-    color: #cbd5e1;
-}
-
-.contact p a {
-    text-decoration: none;
-    color: #ffffff;
-    transition: color 0.3s;
-}
-
-        .contact p a:hover {
-    color: #ffffff;
-}
-
         @media (max-width: 900px) {
             .site-header {
                 padding: 16px 24px;
             }
 
             .about-highlights {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .contact-methods {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
@@ -1128,6 +1147,36 @@
 
             .about-highlight-card {
                 min-height: 74px;
+            }
+
+            .contact {
+                padding: 64px 16px;
+            }
+
+            .contact h2 {
+                font-size: 2rem;
+            }
+
+            .contact-methods {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                margin-bottom: 30px;
+            }
+
+            .contact-card {
+                min-height: 96px;
+                flex-direction: row;
+                justify-content: flex-start;
+                text-align: left;
+                padding: 16px;
+            }
+
+            .contact-card-text {
+                align-items: flex-start;
+            }
+
+            .contact-form-panel {
+                padding: 20px;
             }
 
             .intro-loader {
