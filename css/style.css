@@ -843,6 +843,68 @@
             color: #cbd5e1;
         }
 
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .card-tags span {
+            padding: 6px 10px;
+            color: #7dd3fc;
+            font-size: 0.78rem;
+            font-weight: 600;
+            line-height: 1.2;
+            border: 1px solid rgba(56, 189, 248, 0.22);
+            border-radius: 999px;
+            background-color: rgba(56, 189, 248, 0.08);
+        }
+
+        .card-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .card-actions a,
+        .portfolio-card .card-actions a,
+        .research-card .card-actions a,
+        .game-card .card-actions a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 10px 16px;
+            margin-top: 0;
+            color: #06111f;
+            font-size: 0.92rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: 0;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #38bdf8, #22c55e);
+            box-shadow: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-actions a:hover,
+        .card-actions a:focus-visible,
+        .portfolio-card .card-actions a:hover,
+        .portfolio-card .card-actions a:focus-visible,
+        .research-card .card-actions a:hover,
+        .research-card .card-actions a:focus-visible,
+        .game-card .card-actions a:hover,
+        .game-card .card-actions a:focus-visible {
+            color: #06111f;
+            box-shadow: 0 14px 28px rgba(56, 189, 248, 0.22);
+            transform: translateY(-2px);
+            outline: none;
+        }
+
         .portfolio-card a {
             display: block;
             padding: 10px 20px;
@@ -858,6 +920,14 @@
         .portfolio-card a:hover {
             box-shadow: 0 14px 28px rgba(56, 189, 248, 0.22);
             transform: translateY(-2px);
+        }
+
+        .portfolio-card .card-actions a,
+        .research-card .card-actions a,
+        .game-card .card-actions a {
+            display: inline-flex;
+            margin-top: 0;
+            border-radius: 999px;
         }
 
         .contact-content {
