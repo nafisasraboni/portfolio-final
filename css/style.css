@@ -679,6 +679,7 @@
         .experience,
         .services,
         .research,
+        .games,
         .portfolio,
         .contact {
             padding: 80px 20px;
@@ -700,6 +701,7 @@
         .experience h2,
         .services h2,
         .research h2,
+        .games h2,
         .portfolio h2 {
             font-size: 2.3rem;
             color: #f8fafc;
@@ -783,6 +785,7 @@
         .services-grid,
         .portfolio-grid,
         .research-grid,
+        .games-grid,
         .skills-grid,
         .experience-grid {
             display: flex;
@@ -796,6 +799,7 @@
         .service-card,
         .portfolio-card,
         .research-card,
+        .game-card,
         .skill-card,
         .experience-card {
             width: 300px;
@@ -810,6 +814,7 @@
         .service-card:hover,
         .portfolio-card:hover,
         .research-card:hover,
+        .game-card:hover,
         .skill-card:hover,
         .experience-card:hover {
             transform: translateY(-15px);
@@ -820,6 +825,7 @@
         .service-card h3,
         .portfolio-card h3,
         .research-card h3,
+        .game-card h3,
         .skill-card h3,
         .experience-card h3 {
             font-size: 2rem;
@@ -830,6 +836,7 @@
         .service-card p,
         .portfolio-card p,
         .research-card p,
+        .game-card p,
         .skill-card p,
         .experience-card p {
             font-size: 1.3rem;
