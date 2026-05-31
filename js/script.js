@@ -1,9 +1,16 @@
+const SITE_VERSION = 'credential-cta-20260601';
+
+const addCacheBust = (filePath) => {
+    const separator = filePath.includes('?') ? '&' : '?';
+    return `${filePath}${separator}v=${SITE_VERSION}`;
+};
+
 const loadSectionIncludes = async () => {
     const includeElements = Array.from(document.querySelectorAll('[data-include]'));
 
     await Promise.all(includeElements.map(async (element) => {
         const filePath = element.getAttribute('data-include');
-        const response = await fetch(filePath);
+        const response = await fetch(addCacheBust(filePath), { cache: 'no-cache' });
 
         if (!response.ok) {
             throw new Error(`Could not load ${filePath}`);
