@@ -791,28 +791,42 @@
         }
 
         .flip-card-hint {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
             margin: 0;
-            color: #94a3b8;
+            padding: 7px 12px;
+            color: #dff7ff;
             font-size: 0.82rem;
-            font-weight: 600;
-            line-height: 1.4;
-            animation: hintPulse 1.8s ease-in-out infinite;
-            will-change: color, opacity, transform;
+            font-weight: 700;
+            line-height: 1;
+            border: 1px solid rgba(56, 189, 248, 0.24);
+            border-radius: 999px;
+            background: rgba(8, 47, 73, 0.28);
+            box-shadow: 0 0 0 rgba(56, 189, 248, 0);
+            transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease,
+                box-shadow 0.25s ease, transform 0.25s ease;
+            will-change: box-shadow, transform;
         }
 
-        @keyframes hintPulse {
-            0%,
-            100% {
-                color: #94a3b8;
-                opacity: 0.72;
-                transform: translateY(0);
-            }
+        .flip-card-hint-arrow {
+            display: inline-block;
+            transition: transform 0.25s ease;
+        }
 
-            50% {
-                color: #7dd3fc;
-                opacity: 1;
-                transform: translateY(-2px);
-            }
+        .certification-flip-card:hover .flip-card-hint,
+        .certification-flip-card:focus-visible .flip-card-hint {
+            color: #f8fafc;
+            border-color: rgba(125, 211, 252, 0.72);
+            background: rgba(14, 116, 144, 0.2);
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.26);
+            transform: translateY(-1px);
+        }
+
+        .certification-flip-card:hover .flip-card-hint-arrow,
+        .certification-flip-card:focus-visible .flip-card-hint-arrow {
+            transform: translate(4px, -1px);
         }
 
         .flip-card-back {
@@ -1731,7 +1745,13 @@
 
             .flip-card-hint {
                 animation: none;
+                transition: none;
                 opacity: 1;
+                transform: none;
+            }
+
+            .flip-card-hint-arrow {
+                transition: none;
                 transform: none;
             }
 
