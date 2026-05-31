@@ -677,6 +677,7 @@
         .about,
         .skills,
         .experience,
+        .certifications,
         .services,
         .research,
         .games,
@@ -699,6 +700,7 @@
         .about h2,
         .skills h2,
         .experience h2,
+        .certifications h2,
         .services h2,
         .research h2,
         .games h2,
@@ -707,6 +709,13 @@
             color: #f8fafc;
             margin-bottom: 30px;
             letter-spacing: 1px;
+        }
+
+        .section-subtitle {
+            margin: -18px auto 28px;
+            color: #7dd3fc;
+            font-size: 1.05rem;
+            font-weight: 600;
         }
 
         .about-content {
@@ -787,6 +796,7 @@
         .research-grid,
         .games-grid,
         .skills-grid,
+        .certifications-grid,
         .experience-grid {
             display: flex;
             justify-content: center;
@@ -801,6 +811,7 @@
         .research-card,
         .game-card,
         .skill-card,
+        .certification-card,
         .experience-card {
             width: 300px;
             padding: 25px;
@@ -821,6 +832,7 @@
         .research-card:hover,
         .game-card:hover,
         .skill-card:hover,
+        .certification-card:hover,
         .experience-card:hover {
             transform: translateY(-15px);
             border-color: rgba(56, 189, 248, 0.46);
@@ -832,6 +844,7 @@
         .research-card h3,
         .game-card h3,
         .skill-card h3,
+        .certification-card h3,
         .experience-card h3 {
             font-size: 2rem;
             margin-bottom: 15px;
@@ -843,9 +856,47 @@
         .research-card p,
         .game-card p,
         .skill-card p,
+        .certification-card p,
         .experience-card p {
             font-size: 1.3rem;
             color: #cbd5e1;
+        }
+
+        .card-badge {
+            display: inline-flex;
+            margin-bottom: 14px;
+            padding: 6px 10px;
+            color: #38bdf8;
+            font-size: 0.78rem;
+            font-weight: 700;
+            line-height: 1.2;
+            border: 1px solid rgba(56, 189, 248, 0.24);
+            border-radius: 999px;
+            background-color: rgba(56, 189, 248, 0.08);
+        }
+
+        .experience-card .experience-meta,
+        .experience-card .experience-organization,
+        .experience-card .experience-duration,
+        .certification-card .experience-meta,
+        .certification-card .experience-organization,
+        .certification-card .experience-duration {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .experience-card .experience-meta,
+        .certification-card .experience-meta {
+            color: #f8fafc;
+            font-weight: 600;
+        }
+
+        .experience-card .experience-organization,
+        .experience-card .experience-duration,
+        .certification-card .experience-organization,
+        .certification-card .experience-duration {
+            color: #94a3b8;
         }
 
         .card-tags {
