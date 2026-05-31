@@ -133,10 +133,39 @@ const initRevealAnimations = () => {
     }
 };
 
+const initCertificationFlipCards = () => {
+    const flipCards = document.querySelectorAll('.certification-flip-card');
+
+    flipCards.forEach((card) => {
+        const toggleCard = () => {
+            const isFlipped = card.classList.toggle('is-flipped');
+            card.setAttribute('aria-pressed', String(isFlipped));
+        };
+
+        card.addEventListener('click', (event) => {
+            if (event.target.closest('a')) {
+                return;
+            }
+
+            toggleCard();
+        });
+
+        card.addEventListener('keydown', (event) => {
+            if (event.key !== 'Enter' && event.key !== ' ') {
+                return;
+            }
+
+            event.preventDefault();
+            toggleCard();
+        });
+    });
+};
+
 const initPortfolio = () => {
     initIntroLoader();
     initNavigation();
     initRevealAnimations();
+    initCertificationFlipCards();
 };
 
 const bootPortfolio = async () => {
