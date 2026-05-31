@@ -134,30 +134,40 @@ const initRevealAnimations = () => {
 };
 
 const initCertificationFlipCards = () => {
-    const flipCards = document.querySelectorAll('.certification-flip-card');
+    if (document.body.dataset.certificationFlipReady === 'true') {
+        return;
+    }
 
-    flipCards.forEach((card) => {
-        const toggleCard = () => {
-            const isFlipped = card.classList.toggle('is-flipped');
-            card.setAttribute('aria-pressed', String(isFlipped));
-        };
+    document.body.dataset.certificationFlipReady = 'true';
 
-        card.addEventListener('click', (event) => {
-            if (event.target.closest('a')) {
-                return;
-            }
+    const toggleCard = (card) => {
+        const isFlipped = card.classList.toggle('is-flipped');
+        card.setAttribute('aria-pressed', String(isFlipped));
+    };
 
-            toggleCard();
-        });
+    document.addEventListener('click', (event) => {
+        const card = event.target.closest('.certification-flip-card');
 
-        card.addEventListener('keydown', (event) => {
-            if (event.key !== 'Enter' && event.key !== ' ') {
-                return;
-            }
+        if (!card || event.target.closest('a')) {
+            return;
+        }
 
-            event.preventDefault();
-            toggleCard();
-        });
+        toggleCard(card);
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') {
+            return;
+        }
+
+        const card = event.target.closest('.certification-flip-card');
+
+        if (!card) {
+            return;
+        }
+
+        event.preventDefault();
+        toggleCard(card);
     });
 };
 
