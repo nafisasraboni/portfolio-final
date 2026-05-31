@@ -796,6 +796,23 @@
             font-size: 0.82rem;
             font-weight: 600;
             line-height: 1.4;
+            animation: hintPulse 1.8s ease-in-out infinite;
+            will-change: color, opacity, transform;
+        }
+
+        @keyframes hintPulse {
+            0%,
+            100% {
+                color: #94a3b8;
+                opacity: 0.72;
+                transform: translateY(0);
+            }
+
+            50% {
+                color: #7dd3fc;
+                opacity: 1;
+                transform: translateY(-2px);
+            }
         }
 
         .flip-card-back {
@@ -1710,6 +1727,12 @@
 
             .flip-card-inner {
                 transition: none;
+            }
+
+            .flip-card-hint {
+                animation: none;
+                opacity: 1;
+                transform: none;
             }
 
             .intro-card,
