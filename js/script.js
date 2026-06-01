@@ -1,4 +1,4 @@
-const SITE_VERSION = 'achievements-fontawesome-20260602';
+const SITE_VERSION = 'contact-email-gmail-20260602';
 
 const addCacheBust = (filePath) => {
     const separator = filePath.includes('?') ? '&' : '?';
@@ -279,12 +279,107 @@ const initAchievementModal = () => {
     });
 };
 
+const initContactBehavior = () => {
+    if (document.body.dataset.contactBehaviorReady === 'true') {
+        return;
+    }
+
+    document.body.dataset.contactBehaviorReady = 'true';
+    let toastTimer = null;
+
+    const isMobileContactDevice = () => {
+        const userAgent = navigator.userAgent || '';
+        const mobileUserAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+        const ipadDesktopMode = /Macintosh/i.test(userAgent) && navigator.maxTouchPoints > 1;
+        const coarseSmallScreen = window.matchMedia &&
+            window.matchMedia('(pointer: coarse)').matches &&
+            window.matchMedia('(max-width: 900px)').matches;
+
+        return mobileUserAgent || ipadDesktopMode || coarseSmallScreen;
+    };
+
+    const getContactToast = () => {
+        let toast = document.querySelector('.contact-toast');
+
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.className = 'contact-toast';
+            toast.setAttribute('role', 'status');
+            toast.setAttribute('aria-live', 'polite');
+            document.body.appendChild(toast);
+        }
+
+        return toast;
+    };
+
+    const showPhoneToast = (phoneNumber, copied) => {
+        const toast = getContactToast();
+        toast.textContent = copied ? `Phone: ${phoneNumber} copied` : `Phone: ${phoneNumber}`;
+        toast.classList.add('is-visible');
+
+        window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(() => {
+            toast.classList.remove('is-visible');
+        }, 3600);
+    };
+
+    const copyPhoneNumber = async (phoneNumber) => {
+        if (!navigator.clipboard || !window.isSecureContext) {
+            return false;
+        }
+
+        try {
+            await navigator.clipboard.writeText(phoneNumber);
+            return true;
+        } catch (error) {
+            return false;
+        }
+    };
+
+    document.addEventListener('click', async (event) => {
+        const phoneLink = event.target.closest('#contact a[href^="tel:"]');
+
+        if (!phoneLink || isMobileContactDevice()) {
+            return;
+        }
+
+        event.preventDefault();
+
+        const phoneNumber = phoneLink.dataset.contactPhone || phoneLink.getAttribute('href').replace('tel:', '');
+        const copied = await copyPhoneNumber(phoneNumber);
+        showPhoneToast(phoneNumber, copied);
+    });
+
+    document.addEventListener('click', (event) => {
+        const emailLink = event.target.closest('#contact a[href^="mailto:"]');
+
+        if (!emailLink || isMobileContactDevice()) {
+            return;
+        }
+
+        event.preventDefault();
+
+        const emailAddress = emailLink.dataset.contactEmail || 'nafisasraboni2207@gmail.com';
+        const subject = 'Portfolio Inquiry';
+        const body = 'Hi Nafisa,\n\n';
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailAddress)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const gmailWindow = window.open(gmailUrl, '_blank');
+
+        if (gmailWindow) {
+            gmailWindow.opener = null;
+        } else {
+            window.location.href = emailLink.href;
+        }
+    });
+};
+
 const initPortfolio = () => {
     initIntroLoader();
     initNavigation();
     initRevealAnimations();
     initCertificationFlipCards();
     initAchievementModal();
+    initContactBehavior();
 };
 
 const bootPortfolio = async () => {
