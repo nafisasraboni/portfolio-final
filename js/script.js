@@ -1,4 +1,4 @@
-const SITE_VERSION = 'contact-email-gmail-20260602';
+const SITE_VERSION = 'contact-live-fix-20260602';
 
 const addCacheBust = (filePath) => {
     const separator = filePath.includes('?') ? '&' : '?';
@@ -336,6 +336,22 @@ const initContactBehavior = () => {
         }
     };
 
+    const buildGmailUrl = (emailAddress) => {
+        const subject = 'Portfolio Inquiry';
+        const body = 'Hi Nafisa,\n\n';
+        return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailAddress)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    };
+
+    if (!isMobileContactDevice()) {
+        document.querySelectorAll('#contact a[href^="mailto:"]').forEach((emailLink) => {
+            const emailAddress = emailLink.dataset.contactEmail || 'nafisasraboni2207@gmail.com';
+            emailLink.dataset.mailtoHref = emailLink.href;
+            emailLink.href = buildGmailUrl(emailAddress);
+            emailLink.target = '_blank';
+            emailLink.rel = 'noopener noreferrer';
+        });
+    }
+
     document.addEventListener('click', async (event) => {
         const phoneLink = event.target.closest('#contact a[href^="tel:"]');
 
@@ -351,24 +367,17 @@ const initContactBehavior = () => {
     });
 
     document.addEventListener('click', (event) => {
-        const emailLink = event.target.closest('#contact a[href^="mailto:"]');
+        const emailLink = event.target.closest('#contact a[data-contact-email]');
 
         if (!emailLink || isMobileContactDevice()) {
             return;
         }
 
-        event.preventDefault();
-
-        const emailAddress = emailLink.dataset.contactEmail || 'nafisasraboni2207@gmail.com';
-        const subject = 'Portfolio Inquiry';
-        const body = 'Hi Nafisa,\n\n';
-        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailAddress)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        const gmailWindow = window.open(gmailUrl, '_blank');
-
-        if (gmailWindow) {
-            gmailWindow.opener = null;
-        } else {
-            window.location.href = emailLink.href;
+        if (!emailLink.href.includes('mail.google.com')) {
+            const emailAddress = emailLink.dataset.contactEmail || 'nafisasraboni2207@gmail.com';
+            emailLink.href = buildGmailUrl(emailAddress);
+            emailLink.target = '_blank';
+            emailLink.rel = 'noopener noreferrer';
         }
     });
 };
