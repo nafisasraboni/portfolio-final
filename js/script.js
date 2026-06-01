@@ -1,4 +1,4 @@
-const SITE_VERSION = 'achievements-modal-20260602';
+const SITE_VERSION = 'achievements-fontawesome-20260602';
 
 const addCacheBust = (filePath) => {
     const separator = filePath.includes('?') ? '&' : '?';
@@ -214,18 +214,28 @@ const initAchievementModal = () => {
 
         activeCard = card;
 
+        const modalCard = modal.querySelector('.achievement-modal-card');
         const icon = modal.querySelector('.achievement-modal-icon');
         const label = modal.querySelector('.achievement-modal-label');
         const title = modal.querySelector('#achievement-modal-title');
+        const eventLabel = modal.querySelector('.achievement-modal-event');
         const organization = modal.querySelector('.achievement-modal-organization');
         const issued = modal.querySelector('.achievement-modal-issued');
         const skills = modal.querySelector('.achievement-modal-skills');
         const description = modal.querySelector('.achievement-modal-description');
         const closeButton = modal.querySelector('.achievement-modal-close');
 
-        icon.textContent = card.dataset.icon || '';
-        label.textContent = card.dataset.label || '';
+        const iconElement = document.createElement('i');
+        iconElement.className = card.dataset.iconClass || 'fa-solid fa-award';
+        icon.replaceChildren(iconElement);
+
+        if (modalCard) {
+            modalCard.dataset.theme = card.dataset.theme || 'cyan';
+        }
+
+        label.textContent = card.dataset.badge || '';
         title.textContent = card.dataset.title || '';
+        eventLabel.textContent = card.dataset.label || '';
         organization.textContent = card.dataset.organization ? `Organization: ${card.dataset.organization}` : '';
         issued.textContent = card.dataset.issued ? `Issued: ${card.dataset.issued}` : '';
         description.textContent = card.dataset.description || '';
