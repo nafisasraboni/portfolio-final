@@ -1,4 +1,4 @@
-const SITE_VERSION = 'credential-cta-20260601';
+const SITE_VERSION = 'achievements-modal-20260602';
 
 const addCacheBust = (filePath) => {
     const separator = filePath.includes('?') ? '&' : '?';
@@ -178,11 +178,103 @@ const initCertificationFlipCards = () => {
     });
 };
 
+const initAchievementModal = () => {
+    if (document.body.dataset.achievementModalReady === 'true') {
+        return;
+    }
+
+    document.body.dataset.achievementModalReady = 'true';
+    let activeCard = null;
+
+    const getModal = () => document.getElementById('achievement-modal');
+
+    const closeModal = () => {
+        const modal = getModal();
+
+        if (!modal || !modal.classList.contains('is-open')) {
+            return;
+        }
+
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('achievement-modal-open');
+
+        if (activeCard) {
+            activeCard.focus();
+            activeCard = null;
+        }
+    };
+
+    const openModal = (card) => {
+        const modal = getModal();
+
+        if (!modal) {
+            return;
+        }
+
+        activeCard = card;
+
+        const icon = modal.querySelector('.achievement-modal-icon');
+        const label = modal.querySelector('.achievement-modal-label');
+        const title = modal.querySelector('#achievement-modal-title');
+        const organization = modal.querySelector('.achievement-modal-organization');
+        const issued = modal.querySelector('.achievement-modal-issued');
+        const skills = modal.querySelector('.achievement-modal-skills');
+        const description = modal.querySelector('.achievement-modal-description');
+        const closeButton = modal.querySelector('.achievement-modal-close');
+
+        icon.textContent = card.dataset.icon || '';
+        label.textContent = card.dataset.label || '';
+        title.textContent = card.dataset.title || '';
+        organization.textContent = card.dataset.organization ? `Organization: ${card.dataset.organization}` : '';
+        issued.textContent = card.dataset.issued ? `Issued: ${card.dataset.issued}` : '';
+        description.textContent = card.dataset.description || '';
+
+        const skillItems = (card.dataset.skills || '')
+            .split('|')
+            .filter(Boolean)
+            .map((skill) => {
+                const item = document.createElement('span');
+                item.textContent = skill;
+                return item;
+            });
+
+        skills.replaceChildren(...skillItems);
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('achievement-modal-open');
+
+        if (closeButton) {
+            closeButton.focus();
+        }
+    };
+
+    document.addEventListener('click', (event) => {
+        const card = event.target.closest('.achievement-card');
+
+        if (card) {
+            openModal(card);
+            return;
+        }
+
+        if (event.target.closest('.achievement-modal-close') || event.target.classList.contains('achievement-modal')) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeModal();
+        }
+    });
+};
+
 const initPortfolio = () => {
     initIntroLoader();
     initNavigation();
     initRevealAnimations();
     initCertificationFlipCards();
+    initAchievementModal();
 };
 
 const bootPortfolio = async () => {
