@@ -1,4 +1,4 @@
-const SITE_VERSION = 'contact-live-fix-20260602';
+const SITE_VERSION = 'design-refinement-20260712';
 
 const addCacheBust = (filePath) => {
     const separator = filePath.includes('?') ? '&' : '?';
