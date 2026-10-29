@@ -1304,6 +1304,25 @@
         .project-detail-columns p { line-height: 1.7; }
         @media (max-width: 700px) { .project-detail-columns, .project-highlights ul { grid-template-columns: 1fr; } .project-detail-page { width: min(100% - 32px, 1000px); padding-top: 34px; } .project-highlights { padding: 22px; } }
 
+        .education-kicker { margin: 0 0 8px; color: #7dd3fc; font-size: .78rem; font-weight: 700; letter-spacing: .18em; }
+        .education .experience-grid { margin-top: 34px; }
+        .education-card { width: min(100%, 720px); padding: clamp(24px, 5vw, 42px); text-align: left; border-color: rgba(56, 189, 248, .25); background: linear-gradient(145deg, rgba(17, 35, 53, .98), rgba(10, 22, 37, .98)); }
+        .education-card:hover { transform: translateY(-6px); }
+        .education-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; }
+        .education-icon { display: grid; width: 58px; height: 58px; place-items: center; color: #7dd3fc; border: 1px solid rgba(125, 211, 252, .25); border-radius: 16px; background: rgba(56, 189, 248, .09); }
+        .education-icon svg { width: 34px; height: 34px; }
+        .education-complete { padding: 7px 12px; color: #a7f3d0; font-size: .78rem; font-weight: 700; letter-spacing: .04em; border: 1px solid rgba(52, 211, 153, .25); border-radius: 999px; background: rgba(16, 185, 129, .1); }
+        .education-card h3 { margin: 0 0 12px; font-size: clamp(1.35rem, 3.2vw, 1.8rem); line-height: 1.35; }
+        .education-university { margin: 0 0 26px; color: #7dd3fc !important; font-size: 1rem !important; }
+        .education-university span { color: #94a3b8; font-weight: 400; }
+        .education-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .education-facts > div { display: flex; flex-direction: column; gap: 5px; padding: 15px 17px; border: 1px solid rgba(148, 163, 184, .15); border-radius: 12px; background: rgba(2, 6, 23, .3); }
+        .education-label { color: #94a3b8; font-size: .78rem; text-transform: uppercase; letter-spacing: .09em; }
+        .education-facts strong { color: #f8fafc; font-size: 1.08rem; }
+        .education-facts small { color: #94a3b8; font-size: .8rem; font-weight: 400; }
+        .education-card .education-note { margin: 22px 0 0; color: #b8c5d2; font-size: .94rem; line-height: 1.75; }
+        @media (max-width: 480px) { .education-facts { grid-template-columns: 1fr; } }
+
         .card-badge {
             display: inline-flex;
             margin-bottom: 14px;
